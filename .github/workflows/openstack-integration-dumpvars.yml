@@ -6,7 +6,7 @@ on:
 jobs:
   dumpvars:
     runs-on: ubuntu-latest
-    environment: openstack-integration
+    # environment: openstack-integration
 
     steps:
       - uses: actions/checkout@v4
