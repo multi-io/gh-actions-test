@@ -2,6 +2,8 @@
 
 echo "dumpvars $1"
 
+env
+
 echo "MY_ENV_VAR=${MY_ENV_VAR}"
 echo "MY_ENV_SECRET=${MY_ENV_SECRET}"
 echo "MY_REPO_VAR=${MY_REPO_VAR}"
