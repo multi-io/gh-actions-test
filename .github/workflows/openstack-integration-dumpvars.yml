@@ -4,7 +4,8 @@ on:
   push:
     branches: [ main ]
   # pull_request_target runs in the base repo context, so secrets are available
-  # on fork PRs after environment approval. Never checkout the PR head here.
+  # on fork PRs after environment approval. Checkout uses the PR head so the
+  # job runs the contributor's code; only approve after reviewing the PR.
   pull_request_target:
     types: [opened, synchronize, reopened]
     branches: [ main ]
@@ -18,7 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.base.sha || github.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
 
       - name: Dump environment values
         env:
