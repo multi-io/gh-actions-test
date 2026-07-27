@@ -11,6 +11,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   dumpvars:
     runs-on: ubuntu-latest
@@ -21,6 +24,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          allow-unsafe-pr-checkout: true
 
       - name: Dump environment values
         env:
